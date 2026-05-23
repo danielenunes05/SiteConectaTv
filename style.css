@@ -1,0 +1,319 @@
+/* ── Configurações Gerais de Reset e Rolagem ── */
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #ffffff;
+  color: #1a0a2e;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Customização da Barra de Rolagem ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f3e8ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #a855f7;
+  border-radius: 99px;
+}
+
+/* ── Estrutura do Carrossel de Banners ── */
+.carousel-track {
+  display: flex;
+  transition: transform 700ms cubic-bezier(.77,0,.18,1);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 260px; /* Altura padrão para celulares */
+}
+
+/* Alturas responsivas para telas maiores */
+@media (min-width: 480px)  { .carousel-slide { height: 320px; } }
+@media (min-width: 768px)  { .carousel-slide { height: 420px; } }
+@media (min-width: 1024px) { .carousel-slide { height: 500px; } }
+
+/* Gradientes dos Fundos dos Slides */
+.slide-football {
+  background: linear-gradient(135deg, #1a0035 0%, #3b0764 35%, #6b21a8 70%, #9333ea 100%);
+}
+.slide-streaming {
+  background: linear-gradient(135deg, #0a001f 0%, #1e0050 30%, #4a00a0 65%, #7c3aed 100%);
+}
+.slide-stability {
+  background: linear-gradient(135deg, #05001a 0%, #170040 30%, #3b0764 60%, #6b21a8 100%);
+}
+
+/* Ícones Absolutos Decorativos em Segundo Plano */
+.deco-icon {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Efeito Textura Ruído/Noise sutil nos Banners */
+.slide-noise::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ── Navegação por Bolinhas ── */
+.dot-nav {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.dot-btn {
+  height: 8px;
+  width: 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.dot-btn.active {
+  width: 24px;
+  background: #c084fc;
+}
+
+/* ── Cabeçalho Fixo Otimizado (Header) ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.93);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1.5px solid #e9d5ff;
+  box-shadow: 0 2px 16px rgba(107,33,168,0.07);
+}
+.header-inner {
+  width: 100%;
+  max-width: 100%; /* Remove o limite de 1100px para o topo ocupar a tela toda */
+  margin: 0;        /* Remove as margens que centralizavam o bloco */
+  padding: 0 16px;  /* Deixa um espacinho sutil para a logo não colar na carcaça do monitor */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Ajuste de altura para telas de computador (PC) */
+@media (min-width: 768px) {
+  .header-inner {
+    height: 68px;
+    padding: 0 24px; /* Distância do cantinho da tela no computador */
+  }
+}
+
+/* ── Cards de Opção de Plano ── */
+.plan-card {
+  transition: all 0.25s cubic-bezier(.4,0,.2,1);
+  cursor: pointer;
+}
+.plan-card.selected {
+  border-color: #9333ea !important;
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+  box-shadow: 0 0 0 3px rgba(147,51,234,0.18), 0 8px 32px rgba(147,51,234,0.15) !important;
+  transform: translateY(-2px);
+}
+.plan-card:hover:not(.selected) {
+  border-color: #c084fc !important;
+  background: #faf5ff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(147,51,234,0.10) !important;
+}
+
+/* ── Interruptor Switch do Desconto ── */
+.toggle-track {
+  width: 48px;
+  height: 26px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  position: relative;
+  transition: background 0.25s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.toggle-track.on {
+  background: #9333ea;
+}
+.toggle-thumb {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+.toggle-track.on .toggle-thumb {
+  transform: translateX(22px);
+}
+
+/* ── Botão Principal do Mercado Pago e WhatsApp ── */
+.mp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 18px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 6px 28px rgba(147,51,234,0.45);
+  transition: transform 0.22s, box-shadow 0.22s;
+  text-decoration: none;
+}
+.mp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(147,51,234,0.6);
+}
+.mp-btn:active {
+  transform: scale(0.97);
+}
+
+/* Botão Flutuante do WhatsApp */
+.wa-float {
+  position: fixed;
+  bottom: 22px;
+  right: 16px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  border-radius: 99px;
+  padding: 12px 18px 12px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+  text-decoration: none;
+  animation: wa-bounce 3s ease infinite;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.wa-float:hover {
+  box-shadow: 0 10px 36px rgba(37,211,102,0.65);
+  transform: translateY(-2px) scale(1.02);
+}
+@media (max-width: 400px) {
+  .wa-float span.wa-label { display: none; }
+  .wa-float { padding: 13px; border-radius: 50%; }
+}
+
+/* ── Elementos Visuais Adicionais ── */
+.grad-text {
+  background: linear-gradient(135deg, #7e22ce 0%, #9333ea 55%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.btn-glow {
+  box-shadow: 0 6px 28px rgba(147,51,234,0.45);
+  transition: transform 0.22s, box-shadow 0.22s;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(147,51,234,0.6);
+}
+.btn-glow:active {
+  transform: scale(0.97);
+}
+.feature-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.chip-icon {
+  width: 40px; height: 40px; min-width: 40px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+  border: 1.5px solid #d8b4fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.stat-card {
+  background: white;
+  border: 1.5px solid #e9d5ff;
+  border-radius: 14px;
+  padding: 16px 10px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(107,33,168,0.07);
+}
+.section-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 768px) {
+  .section-wrap { padding: 0 28px; }
+}
+.payment-card {
+  background: white;
+  border: 2px solid #e9d5ff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(107,33,168,0.12);
+  overflow: hidden;
+}
+
+/* ── Animações (Scroll Reveal e Contador) ── */
+.total-animating {
+  animation: pop 0.28s ease;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Estilos Extras para o FAQ Sanfona */
+.faq-item.active {
+  border-color: #c084fc;
+  box-shadow: 0 4px 12px rgba(107,33,168,0.05);
+}
+.faq-item.active .faq-trigger i {
+  transform: rotate(180deg);
+}
+/* Efeito de onda pulsante na bolinha de status do topo */
+@keyframes pulse-green-topo {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.status-online {
+  background-color: #22c55e !important;
+  animation: pulse-green-topo 2s infinite;
+  display: inline-block;
+}
