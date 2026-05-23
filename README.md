@@ -19,3 +19,5 @@ Interface Responsiva: Navegação otimizada para smartphones, tablets e desktops
 Centralização de Conteúdo: Exibição organizada de canais ou grades de programação.
 
 Navegação Dinâmica: Menu interativo e elementos de interface focados na facilidade de uso (Usabilidade).
+
+site: https://conectalivetv.netlify.app/
